@@ -16,8 +16,13 @@ func main() {
 
 func handler() http.Handler {
 	r := http.NewServeMux()
+	r.HandleFunc("/", rootHandler)
 	r.HandleFunc("/double", doubleHandler)
 	return r
+}
+
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Welcome to the page %s\n\tyou want %s\n", r.RemoteAddr, r.URL.String()[1:])
 }
 
 func doubleHandler(w http.ResponseWriter, r *http.Request) {
