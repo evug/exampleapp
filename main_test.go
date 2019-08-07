@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -62,5 +63,30 @@ func TestDoubleHandler(t *testing.T) {
 				t.Fatalf("exppected double to be %v; got %v", tc.double, d)
 			}
 		})
+	}
+}
+
+func TestRouting(t *testing.T) {
+	srv := httptest.NewServer(handler())
+	defer srv.Close()
+
+	res, err := http.Get(fmt.Sprintf("%s/double?v=2", srv.URL))
+	if err != nil {
+		t.Fatalf("could not send Get request: %v", err)
+	}
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("expected status OK; got %v", res.Status)
+	}
+	b, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		t.Fatalf("could not read responce: %v", err)
+	}
+
+	d, err := strconv.Atoi(string(bytes.TrimSpace(b)))
+	if err != nil {
+		t.Fatalf("expected an integer; got %s", b)
+	}
+	if d != 4 {
+		t.Fatalf("exppected double to be 4; got %v", d)
 	}
 }
