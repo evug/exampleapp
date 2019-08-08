@@ -10,17 +10,22 @@ help: ## - Show help message
 .PHONY: build
 build:	## - Build the docker image
 	@printf "\033[32m\xE2\x9c\x93 Build the docker image \n\033[0m"
-	@docker build -t exampleapp:$(VERSION) .
+	@docker build -t exampleapp .
 
 .PHONY: ls
 ls: ## - List 'exampleapp' docker images
 	@printf "\033[32m\xE2\x9c\x93 Losf pf exampleapp images !\n\033[0m"
 	@docker images exampleapp
 
+.PHONY: clean
+clean: ## - Remove  'none' docker images
+	@printf "\033[32m\xE2\x9c\x93 Remove none:none images !\n\033[0m"
+	@docker rmi `docker images -f "dangling=true" -q`
+
 .PHONY: run
 run:	## - Run the docker image
 	@printf "\033[32m\xE2\x9c\x93 Run the exampleapp image\n\033[0m"
-	@docker run -d -p 8080:8080
+	@docker run -d -p 8080:8080 exampleapp
 
 .PHONY: push-to-gcp
 push-to-gcp:	## - Push docker image to gcr.io container registry
@@ -29,8 +34,8 @@ push-to-gcp:	## - Push docker image to gcr.io container registry
 	@docker push gcr.io/evgeniy.suslov/exampleapp:$(VERSION)
 
 .PHONY: test
-test:	## - Run the smallest and secured golang docker image based on scratch
-	@printf "\033[32m\xE2\x9c\x93 Run the exampleapp image\n\033[0m"
+test:	## - Run tests
+	@printf "\033[32m\xE2\x9c\x93 Run tests\n\033[0m"
 	@go test -v
 
 .PHONY: kube-deploy

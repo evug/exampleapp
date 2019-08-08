@@ -10,7 +10,7 @@ COPY . .
 RUN go build -v -o ./app ./main.go
 
 # Package into runtime image
-FROM scratch
+FROM alpine
 WORKDIR /app
 # copy the executable from the builder image
 COPY --from=builder /app/app .
