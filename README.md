@@ -1,0 +1,1 @@
+# Example application for demostration of CI/CD process. 
