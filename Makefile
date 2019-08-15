@@ -40,5 +40,5 @@ test:	## - Run tests
 
 .PHONY: kube-deploy
 kube-deploy:	## - Deploy to kubernetes
-	@printf "\033[32m\xE2\x9c\x93 Run the exampleapp image\n\033[0m"
+	@printf "Run the exampleapp image\n"
 	@kubectl apply -f pod.yaml
