@@ -35,7 +35,7 @@ push-to-gcp:	## - Push docker image to gcr.io container registry
 
 .PHONY: test
 test:	## - Run tests
-	@printf "\033[32m\xE2\x9c\x93 Run tests\n\033[0m"
+	@printf "Run tests\n"
 	@go test -v
 
 .PHONY: kube-deploy
