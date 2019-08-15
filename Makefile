@@ -25,7 +25,7 @@ clean: ## - Remove  'none' docker images
 .PHONY: run
 run:	## - Run the docker image
 	@printf "Run the exampleapp image\n"
-	@docker run -d -p 8080:8080 --name exampleapp exampleapp
+	@docker run -d -p 8080:80 --name exampleapp exampleapp
 
 .PHONY: push-to-gcp
 push-to-gcp:	## - Push docker image to gcr.io container registry
