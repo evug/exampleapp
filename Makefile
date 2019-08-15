@@ -24,7 +24,7 @@ clean: ## - Remove  'none' docker images
 
 .PHONY: run
 run:	## - Run the docker image
-	@printf "\033[32m\xE2\x9c\x93 Run the exampleapp image\n\033[0m"
+	@printf "Run the exampleapp image\n"
 	@docker run -d -p 8080:8080 --name exampleapp exampleapp
 
 .PHONY: push-to-gcp
