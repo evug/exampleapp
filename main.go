@@ -29,7 +29,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	 <title>Welcome to EPAM</title>
 	 <style>
 	   body {
-		   background: white }
+		   background: blue }
 	   section {
 		   background: black;
 		   color: white;
