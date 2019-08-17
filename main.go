@@ -22,7 +22,34 @@ func handler() http.Handler {
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to the page %s\n\tyou want %s\n", r.RemoteAddr, r.URL.String()[1:])
+	page := `<!DOCTYPE html>
+	<html lang="en">
+	<meta charset="utf-8">
+	<head>
+	 <title>Welcome to EPAM</title>
+	 <style>
+	   body {
+		   background: white }
+	   section {
+		   background: black;
+		   color: white;
+		   border-radius: 1em;
+		   padding: 1em;
+		   position: absolute;
+		   top: 50%;
+		   left: 50%;
+		   margin-right: -50%;
+		   transform: translate(-50%, -50%) }
+	 </style>
+	</head>
+	<body>
+	 <section>
+	  <h1>DevOps</h1>
+	  <p>Автоматизация процесса разработки</p>
+	 </section>
+	</body>
+	</html>`
+	fmt.Fprintf(w, page)
 }
 
 func doubleHandler(w http.ResponseWriter, r *http.Request) {
